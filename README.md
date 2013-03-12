@@ -20,8 +20,7 @@ https://github.com/OS4L/CustomLandingPage-Hook
 
 Both Ant & Maven based source code is available in Git.
 
-Packaged War can be download from
-https://raw.github.com/OS4L/CustomLandingPage-Hook/master/maven/6.1.1CEGA2/CustomLandingPage-hook/Package/CustomLandingPage-hook-6.1.1.1.war?raw=true
+Packaged War - http://goo.gl/aPfSh
 
 
 Have a happy Custom Landing !!! :)
