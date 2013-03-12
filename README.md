@@ -25,7 +25,8 @@ Both Ant & Maven based source code is available in Git.
 ######Packaged War
 * [CustomLandingPage-hook-6.1.1.1.war](http://goo.gl/aPfSh "CustomLandingPage-hook-6.1.1.1.war")
 
-###### Custom Landing Page Hook on Liferay Marketplace !!
+
+## Custom Landing Page Hook on Liferay Marketplace !!
 * [Custom Landing Page Hook](http://www.liferay.com/marketplace/-/mp/application/17676547 "Custom Landing Page Hook")
 
 
