@@ -1,3 +1,4 @@
+![OS4L](http://2.bp.blogspot.com/-2SirYYg_HHE/UT6o-wro58I/AAAAAAAAAzI/OwNf6nkXUMU/s1600/upload_00033073.png "OS4L")
 Custom Landing Page Hook
 ========================
 
@@ -14,13 +15,18 @@ custom.landing.page.type={userPrivatePage/userPublicPage/sitePublicPage/sitePriv
 
 This propery need to be set in portal.properties located in Custom Landing Page hook itself. Either you can modify it directly in war. Or you can download the source code from Git repositry and you can build war from source with your desired changes.
 
-Custonm Landing Page Hook - Git Source
----------------------------------------
-https://github.com/OS4L/CustomLandingPage-Hook
+######Custonm Landing Page Hook - Git Source
+
+* https://github.com/OS4L/CustomLandingPage-Hook
 
 Both Ant & Maven based source code is available in Git.
 
-Packaged War - http://goo.gl/aPfSh
+
+######Packaged War
+* [CustomLandingPage-hook-6.1.1.1.war](http://goo.gl/aPfSh "CustomLandingPage-hook-6.1.1.1.war")
+
+###### Custom Landing Page Hook on Liferay Marketplace !!
+* [Custom Landing Page Hook](http://www.liferay.com/marketplace/-/mp/application/17676547 "Custom Landing Page Hook")
 
 
 Have a happy Custom Landing !!! :)
