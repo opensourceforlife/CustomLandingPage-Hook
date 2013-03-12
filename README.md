@@ -8,12 +8,7 @@ Right now it's having below options for landing page.
 
 
 Set this property as per your needs for landing page after user log in. It could be from one of the value from below options
-1. userPrivatePage
-2. userPublicPage
-3. sitePublicPage
-4. sitePrivatePage
-5. organizationPublicPage
-6. organizationPrivatePage
+1. userPrivatePage, 2. userPublicPage, 3. sitePublicPage, 4. sitePrivatePage, 5. organizationPublicPage, 6. organizationPrivatePage
 
 custom.landing.page.type={userPrivatePage/userPublicPage/sitePublicPage/sitePrivatePage/organizationPublicPage/organizationPrivatePage} 
 
@@ -25,11 +20,8 @@ https://github.com/OS4L/CustomLandingPage-Hook
 
 Both Ant & Maven based source code is available in Git.
 
-Packaged War can be download from either
-
-- 
+Packaged War can be download from
 https://raw.github.com/OS4L/CustomLandingPage-Hook/master/maven/6.1.1CEGA2/CustomLandingPage-hook/Package/CustomLandingPage-hook-6.1.1.1.war?raw=true
-
 
 
 Have a happy Custom Landing !!! :)
