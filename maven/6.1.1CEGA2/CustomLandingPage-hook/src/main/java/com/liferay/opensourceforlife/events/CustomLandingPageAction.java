@@ -27,46 +27,47 @@ import com.liferay.portal.util.PortalUtil;
 /**
  * @author Tejas Kanani
  */
-public class CustomLandingPageAction extends Action {
+public class CustomLandingPageAction extends Action
+{
 
 	@Override
-	public void run(final HttpServletRequest request,
-			final HttpServletResponse response) throws ActionException {
+	public void run(final HttpServletRequest request, final HttpServletResponse response)
+			throws ActionException
+	{
 
-		try {
+		try
+		{
 			doRun(request, response);
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			throw new ActionException(e);
 		}
 	}
 
-	protected void doRun(final HttpServletRequest request,
-			final HttpServletResponse response) throws SystemException,
-			PortalException {
+	protected void doRun(final HttpServletRequest request, final HttpServletResponse response)
+			throws SystemException, PortalException
+	{
 
 		long companyId = PortalUtil.getCompanyId(request);
 
-		String path = PrefsPropsUtil.getString(companyId,
-				PropsKeys.DEFAULT_LANDING_PAGE_PATH);
+		String path = PrefsPropsUtil.getString(companyId, PropsKeys.DEFAULT_LANDING_PAGE_PATH);
 
-		if (LOG.isInfoEnabled()) {
-			LOG.info(PropsKeys.DEFAULT_LANDING_PAGE_PATH + StringPool.EQUAL
-					+ path);
+		if (LOG.isInfoEnabled())
+		{
+			LOG.info(PropsKeys.DEFAULT_LANDING_PAGE_PATH + StringPool.EQUAL + path);
 		}
 
 		// Check for override.default.landing.page.path property value
-		boolean overrideDefaultLandingPagePath = PrefsPropsUtil.getBoolean(
-				companyId,
-				CustomLandingPageConstant.OVERRIDE_DEFAULT_LANDING_PAGE_PATH,
-				Boolean.TRUE);
+		boolean overrideDefaultLandingPagePath = PrefsPropsUtil.getBoolean(companyId,
+				CustomLandingPageConstant.OVERRIDE_DEFAULT_LANDING_PAGE_PATH, Boolean.TRUE);
 
-		if (overrideDefaultLandingPagePath) {
+		if (overrideDefaultLandingPagePath)
+		{
 			path = getCustomLandingPage(request);
 		}
 
 		HttpSession session = request.getSession();
-		session.setAttribute(WebKeys.LAST_PATH, new LastPath(StringPool.BLANK,
-				path));
+		session.setAttribute(WebKeys.LAST_PATH, new LastPath(StringPool.BLANK, path));
 
 	}
 
@@ -78,8 +79,9 @@ public class CustomLandingPageAction extends Action {
 	 * @throws PortalException
 	 * @throws SystemException
 	 */
-	private String getCustomLandingPage(final HttpServletRequest request)
-			throws PortalException, SystemException {
+	private String getCustomLandingPage(final HttpServletRequest request) throws PortalException,
+			SystemException
+	{
 
 		String customLandingPagePath = StringPool.BLANK;
 		long companyId = PortalUtil.getCompanyId(request);
@@ -88,8 +90,8 @@ public class CustomLandingPageAction extends Action {
 				CustomLandingPageConstant.CUSTOM_LANDING_PAGE_TYPE,
 				CustomLandingPageConstant.DEFAULT_LANDING_PAGE_TYPE);
 
-		if (landingPageTypeSelection != null
-				&& !landingPageTypeSelection.trim().isEmpty()) {
+		if (landingPageTypeSelection != null && !landingPageTypeSelection.trim().isEmpty())
+		{
 
 			LandingPageType landingPageType = LandingPageTypeFactory
 					.getLandingPageTypeInstance(landingPageTypeSelection);
@@ -99,6 +101,5 @@ public class CustomLandingPageAction extends Action {
 		return customLandingPagePath;
 	}
 
-	private static final Log LOG = LogFactoryUtil
-			.getLog(CustomLandingPageAction.class);
+	private static final Log LOG = LogFactoryUtil.getLog(CustomLandingPageAction.class);
 }

@@ -5,11 +5,13 @@
 package com.liferay.opensourceforlife.util;
 
 /**
- * @author tejas.kanani
+ * @author Tejas Kanani
  */
-public final class CustomLandingPageConstant {
+public final class CustomLandingPageConstant
+{
 
-	private CustomLandingPageConstant() {
+	private CustomLandingPageConstant()
+	{
 	}
 
 	public static final String OVERRIDE_DEFAULT_LANDING_PAGE_PATH = "override.default.landing.page.path";

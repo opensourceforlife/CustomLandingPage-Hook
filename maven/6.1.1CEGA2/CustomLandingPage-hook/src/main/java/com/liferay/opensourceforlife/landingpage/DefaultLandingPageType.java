@@ -9,16 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
- * @author tejas.kanani
+ * @author Tejas Kanani
  */
-public class DefaultLandingPageType extends LandingPageType {
+public class DefaultLandingPageType implements LandingPageType
+{
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.liferay.opensourceforlife.landingpage.LandingPageType#getLandingPagePath (javax.portlet.PortletRequest)
-	 */
-	@Override
-	public String getLandingPagePath(final HttpServletRequest request) {
+	public String getLandingPagePath(final HttpServletRequest request)
+	{
 
 		return StringPool.BLANK;
 	}

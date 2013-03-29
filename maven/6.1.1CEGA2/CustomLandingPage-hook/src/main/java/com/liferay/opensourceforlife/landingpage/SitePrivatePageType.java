@@ -17,32 +17,28 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 
 /**
- * @author tejas.kanani
+ * @author Tejas Kanani
  */
-public class SitePrivatePageType extends LandingPageType {
+public class SitePrivatePageType implements LandingPageType
+{
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.liferay.opensourceforlife.landingpage.LandingPageType#getLandingPagePath (javax.portlet.PortletRequest)
-	 */
-	@Override
-	public String getLandingPagePath(final HttpServletRequest request)
-			throws PortalException, SystemException {
+	public String getLandingPagePath(final HttpServletRequest request) throws PortalException,
+			SystemException
+	{
 
 		String sitePath = StringPool.BLANK;
 
 		User currentUser = PortalUtil.getUser(request);
 
-		List<Group> userSites = CustomLandingPageUtil.getSites(currentUser
-				.getUserId());
+		List<Group> userSites = CustomLandingPageUtil.getSites(currentUser.getUserId());
 
-		if (userSites != null && !userSites.isEmpty()) {
+		if (userSites != null && !userSites.isEmpty())
+		{
 			// If user is member of more than one sites then it will take
 			// first site from list
 			String siteFriendlyURL = userSites.get(0).getFriendlyURL();
 			sitePath = CustomLandingPageUtil.getLanguage(request)
-					+ PortalUtil.getPathFriendlyURLPrivateGroup()
-					+ siteFriendlyURL;
+					+ PortalUtil.getPathFriendlyURLPrivateGroup() + siteFriendlyURL;
 		}
 		return sitePath;
 	}

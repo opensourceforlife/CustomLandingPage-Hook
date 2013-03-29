@@ -10,10 +10,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * @author tejas.kanani
+ * @author Tejas Kanani
  */
-public abstract class LandingPageType {
+public interface LandingPageType
+{
 
-	public abstract String getLandingPagePath(HttpServletRequest request)
-			throws PortalException, SystemException;
+	public String getLandingPagePath(HttpServletRequest request) throws PortalException,
+			SystemException;
 }

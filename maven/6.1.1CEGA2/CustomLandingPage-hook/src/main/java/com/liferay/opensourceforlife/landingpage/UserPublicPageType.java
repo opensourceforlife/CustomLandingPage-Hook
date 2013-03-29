@@ -11,16 +11,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * @author tejas.kanani
+ * @author Tejas Kanani
  */
-public class UserPublicPageType extends LandingPageType
+public class UserPublicPageType implements LandingPageType
 {
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.liferay.opensourceforlife.landingpage.LandingPageType#getLandingPagePath (javax.portlet.PortletRequest)
-	 */
-	@Override
 	public String getLandingPagePath(final HttpServletRequest request) throws PortalException,
 			SystemException
 	{

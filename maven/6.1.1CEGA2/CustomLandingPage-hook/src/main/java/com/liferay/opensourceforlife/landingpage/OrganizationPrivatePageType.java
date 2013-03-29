@@ -17,17 +17,14 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 
 /**
- * @author tejas.kanani
+ * @author Tejas Kanani
  */
-public class OrganizationPrivatePageType extends LandingPageType {
+public class OrganizationPrivatePageType implements LandingPageType
+{
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.liferay.opensourceforlife.landingpage.LandingPageType#getLandingPagePath (javax.portlet.PortletRequest)
-	 */
-	@Override
-	public String getLandingPagePath(final HttpServletRequest request)
-			throws PortalException, SystemException {
+	public String getLandingPagePath(final HttpServletRequest request) throws PortalException,
+			SystemException
+	{
 
 		String organizationPath = StringPool.BLANK;
 
@@ -35,16 +32,15 @@ public class OrganizationPrivatePageType extends LandingPageType {
 
 		List<Organization> userOrganizations = currentUser.getOrganizations();
 
-		if (userOrganizations != null && !userOrganizations.isEmpty()) {
+		if (userOrganizations != null && !userOrganizations.isEmpty())
+		{
 
 			// If user is member of more than one organization then it will take
 			// first organization from list
-			String organizationFriendlyURL = userOrganizations.get(0)
-					.getGroup().getFriendlyURL();
+			String organizationFriendlyURL = userOrganizations.get(0).getGroup().getFriendlyURL();
 
 			organizationPath = CustomLandingPageUtil.getLanguage(request)
-					+ PortalUtil.getPathFriendlyURLPrivateGroup()
-					+ organizationFriendlyURL;
+					+ PortalUtil.getPathFriendlyURLPrivateGroup() + organizationFriendlyURL;
 		}
 
 		return organizationPath;

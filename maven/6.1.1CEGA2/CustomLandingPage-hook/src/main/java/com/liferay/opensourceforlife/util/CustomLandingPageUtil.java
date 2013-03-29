@@ -25,7 +25,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
 /**
- * @author tejas.kanani
+ * @author Tejas Kanani
  */
 public final class CustomLandingPageUtil
 {
