@@ -19,7 +19,7 @@ This propery need to be set in portal.properties located in Custom Landing Page 
 
 * https://github.com/OS4L/CustomLandingPage-Hook
 
-Both Ant & Maven based source code is available in Git.
+Maven based source code is available in Git.
 
 
 ######Packaged War
