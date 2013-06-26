@@ -17,7 +17,7 @@ This propery need to be set in portal.properties located in Custom Landing Page 
 
 ######Custom Landing Page Hook - Git Source
 
-* https://github.com/OS4L/CustomLandingPage-Hook
+* https://github.com/opensourceforlife/CustomLandingPage-Hook
 
 Maven based source code is available in Git.
 
