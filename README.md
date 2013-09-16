@@ -15,6 +15,16 @@ custom.landing.page.type={userPrivatePage/userPublicPage/sitePublicPage/sitePriv
 
 This propery need to be set in portal.properties located in Custom Landing Page hook itself. Either you can modify it directly in war. Or you can download the source code from Git repositry and you can build war from source with your desired changes.
 
+###### Update (New option got added !!!)
+There ia a new option added by which any specific page wihtin a Site/Organization can be made a landing page for that Site/Organization instead of their home page.
+
+Just create a custom attribute of Site/Organization by mentioning the the page friendlyURL.
+
+For defining,
+
+* Site/Organization's Public page, create custom attribute of type "TextField" with key "landingPagePublic" and define value as page's friendlyURL. i.e. /welcome
+* Site/Organization's Private page, create custom attribute of type "TextField" with key "landingPagePrivate" and define value as page's friendlyURL. i.e. /myhome
+
 ######Custom Landing Page Hook - Git Source
 
 * https://github.com/opensourceforlife/CustomLandingPage-Hook
