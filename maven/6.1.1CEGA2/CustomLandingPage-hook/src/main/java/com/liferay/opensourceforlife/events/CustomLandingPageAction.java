@@ -52,9 +52,9 @@ public class CustomLandingPageAction extends Action
 
 		String path = PrefsPropsUtil.getString(companyId, PropsKeys.DEFAULT_LANDING_PAGE_PATH);
 
-		if (LOG.isInfoEnabled())
+		if (LOG.isDebugEnabled())
 		{
-			LOG.info(PropsKeys.DEFAULT_LANDING_PAGE_PATH + StringPool.EQUAL + path);
+			LOG.debug(PropsKeys.DEFAULT_LANDING_PAGE_PATH + StringPool.EQUAL + path);
 		}
 
 		// Check for override.default.landing.page.path property value
@@ -67,6 +67,12 @@ public class CustomLandingPageAction extends Action
 		}
 
 		HttpSession session = request.getSession();
+
+		if (LOG.isDebugEnabled())
+		{
+			LOG.debug("Custom Lading Page path : " + StringPool.EQUAL + path);
+		}
+
 		session.setAttribute(WebKeys.LAST_PATH, new LastPath(StringPool.BLANK, path));
 
 	}

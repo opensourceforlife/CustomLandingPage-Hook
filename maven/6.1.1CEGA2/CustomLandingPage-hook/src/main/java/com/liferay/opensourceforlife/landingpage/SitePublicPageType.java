@@ -33,11 +33,17 @@ public class SitePublicPageType implements LandingPageType
 
 		if (userSites != null && !userSites.isEmpty())
 		{
+			Group site = userSites.get(0);
+
 			// If user is member of more than one sites then it will take
 			// first site from list
-			String siteFriendlyURL = userSites.get(0).getFriendlyURL();
+			String siteFriendlyURL = site.getFriendlyURL();
+
 			sitePath = CustomLandingPageUtil.getLanguage(request)
-					+ PortalUtil.getPathFriendlyURLPublic() + siteFriendlyURL;
+					+ PortalUtil.getPathFriendlyURLPublic()
+					+ siteFriendlyURL
+					+ CustomLandingPageUtil.getLandingPageFriendlyURL(site,
+							PortalUtil.getCompanyId(request), Boolean.FALSE);
 		}
 		return sitePath;
 	}

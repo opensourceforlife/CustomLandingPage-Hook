@@ -13,15 +13,20 @@ import javax.servlet.http.HttpServletRequest;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
 /**
@@ -175,6 +180,12 @@ public final class CustomLandingPageUtil
 		return sb.toString();
 	}
 
+	/**
+	 * @param userId
+	 * @return
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	public static List<Group> getSites(final long userId) throws PortalException, SystemException
 	{
 
@@ -192,4 +203,121 @@ public final class CustomLandingPageUtil
 		}
 		return sites;
 	}
+
+	/**
+	 * @param landingPageValue
+	 * @param groupId
+	 * @param isPrivateLayout
+	 * @return
+	 */
+	public static String getLayoutFriendlyURL(final String landingPageValue, final long groupId,
+			final boolean isPrivateLayout)
+	{
+		String friendlyURL = StringPool.BLANK;
+		try
+		{
+			friendlyURL = LayoutLocalServiceUtil.getFriendlyURLLayout(groupId, isPrivateLayout,
+					landingPageValue).getFriendlyURL();
+		} catch (PortalException e)
+		{
+			LOG.error("Error in getting page friendlyURL of value mentioned in custom attribute : "
+					+ landingPageValue);
+			LOG.error(e.getMessage(), e);
+		} catch (SystemException e)
+		{
+			LOG.error("Error in getting page friendlyURL of value mentioned in custom attribute : "
+					+ landingPageValue);
+			LOG.error(e.getMessage(), e);
+		}
+		return friendlyURL;
+	}
+
+	/**
+	 * @param organization
+	 * @param companyId
+	 * @param isPrivateLayout
+	 * @return
+	 */
+	public static String getLandingPageFriendlyURL(final Organization organization,
+			final long companyId, final Boolean isPrivateLayout)
+	{
+		String landingPageFriendlyURL = StringPool.BLANK;
+
+		if (Validator.isNotNull(organization))
+		{
+			String landingPageKey = getLandingPageKey(companyId, isPrivateLayout);
+			String landingPageValue = (String) organization.getExpandoBridge().getAttribute(
+					landingPageKey, Boolean.FALSE);
+			if (Validator.isNotNull(landingPageValue))
+			{
+				landingPageFriendlyURL = CustomLandingPageUtil.getLayoutFriendlyURL(
+						landingPageValue, organization.getGroupId(), isPrivateLayout);
+			} else
+			{
+				LOG.debug("Either no Custom Attribute found with key " + landingPageKey + " in "
+						+ organization.getName() + " organization OR it is having null/blank value");
+			}
+		}
+
+		return landingPageFriendlyURL;
+	}
+
+	/**
+	 * @param organization
+	 * @param companyId
+	 * @param isPrivateLayout
+	 * @return
+	 */
+	public static String getLandingPageFriendlyURL(final Group group, final long companyId,
+			final Boolean isPrivateLayout)
+	{
+		String landingPageFriendlyURL = StringPool.BLANK;
+
+		if (Validator.isNotNull(group))
+		{
+			String landingPageKey = getLandingPageKey(companyId, isPrivateLayout);
+			String landingPageValue = (String) group.getExpandoBridge().getAttribute(
+					landingPageKey, Boolean.FALSE);
+			if (Validator.isNotNull(landingPageValue))
+			{
+				landingPageFriendlyURL = CustomLandingPageUtil.getLayoutFriendlyURL(
+						landingPageValue, group.getGroupId(), isPrivateLayout);
+			} else
+			{
+				LOG.debug("Either no Custom Attribute found with key " + landingPageKey + " in "
+						+ group.getName() + " site OR it is having null/blank value");
+			}
+		}
+
+		return landingPageFriendlyURL;
+	}
+
+	/**
+	 * Method will get the Landing Page key that will be used as key to fetch site/organization's
+	 * custom attribute
+	 * 
+	 * @param isPrivateLayout
+	 * @return Landing Page Key for Custom Attribute
+	 */
+	public static String getLandingPageKey(final long companyId, final Boolean isPrivateLayout)
+	{
+		String landingPageKey = CustomLandingPageConstant.LANDING_PAGE_KEY_DEFAULT_VALUE;
+		try
+		{
+			landingPageKey = PrefsPropsUtil.getString(companyId,
+					CustomLandingPageConstant.CUSTOM_LANDING_PAGE_KEY, landingPageKey);
+			landingPageKey = landingPageKey
+					+ (isPrivateLayout ? CustomLandingPageConstant.PRIVATE
+							: CustomLandingPageConstant.PUBLIC);
+		} catch (SystemException e)
+		{
+			LOG.error("Error in getting fetching "
+					+ CustomLandingPageConstant.CUSTOM_LANDING_PAGE_KEY
+					+ " value from portal.properties file", e);
+		}
+
+		return landingPageKey;
+	}
+
+	private static final Log LOG = LogFactoryUtil.getLog(CustomLandingPageUtil.class);
 }

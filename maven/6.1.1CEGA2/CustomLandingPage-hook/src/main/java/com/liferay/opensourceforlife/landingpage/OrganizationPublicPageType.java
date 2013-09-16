@@ -22,6 +22,12 @@ import com.liferay.portal.util.PortalUtil;
 public class OrganizationPublicPageType implements LandingPageType
 {
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.liferay.opensourceforlife.landingpage.LandingPageType#getLandingPagePath(javax.servlet
+	 * .http.HttpServletRequest)
+	 */
 	public String getLandingPagePath(final HttpServletRequest request) throws PortalException,
 			SystemException
 	{
@@ -34,16 +40,18 @@ public class OrganizationPublicPageType implements LandingPageType
 
 		if (userOrganizations != null && !userOrganizations.isEmpty())
 		{
-
+			Organization organization = userOrganizations.get(0);
 			// If user is member of more than one organization then it will take
 			// first organization from list
-			String organizationFriendlyURL = userOrganizations.get(0).getGroup().getFriendlyURL();
+			String organizationFriendlyURL = organization.getGroup().getFriendlyURL();
 
 			organizationPath = CustomLandingPageUtil.getLanguage(request)
-					+ PortalUtil.getPathFriendlyURLPublic() + organizationFriendlyURL;
+					+ PortalUtil.getPathFriendlyURLPublic()
+					+ organizationFriendlyURL
+					+ CustomLandingPageUtil.getLandingPageFriendlyURL(organization,
+							PortalUtil.getCompanyId(request), Boolean.FALSE);
 		}
 
 		return organizationPath;
 	}
-
 }

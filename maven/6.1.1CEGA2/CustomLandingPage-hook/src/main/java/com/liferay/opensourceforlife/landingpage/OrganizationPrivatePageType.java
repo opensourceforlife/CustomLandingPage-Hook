@@ -34,13 +34,17 @@ public class OrganizationPrivatePageType implements LandingPageType
 
 		if (userOrganizations != null && !userOrganizations.isEmpty())
 		{
+			Organization organization = userOrganizations.get(0);
 
 			// If user is member of more than one organization then it will take
 			// first organization from list
-			String organizationFriendlyURL = userOrganizations.get(0).getGroup().getFriendlyURL();
+			String organizationFriendlyURL = organization.getGroup().getFriendlyURL();
 
 			organizationPath = CustomLandingPageUtil.getLanguage(request)
-					+ PortalUtil.getPathFriendlyURLPrivateGroup() + organizationFriendlyURL;
+					+ PortalUtil.getPathFriendlyURLPrivateGroup()
+					+ organizationFriendlyURL
+					+ CustomLandingPageUtil.getLandingPageFriendlyURL(organization,
+							PortalUtil.getCompanyId(request), Boolean.TRUE);
 		}
 
 		return organizationPath;

@@ -27,6 +27,11 @@ public final class CustomLandingPageConstant
 	public static final String DEFAULT_LANDING_PAGE_TYPE = "default";
 
 	public static final String GUEST_GROUP_FRIENDLY_URL = "/guest";
+	public static final String PUBLIC = "Public";
+	public static final String PRIVATE = "Private";
 	public static final int FIVE = 5;
+
+	public static final String LANDING_PAGE_KEY_DEFAULT_VALUE = "landingPage";
+	public static final String CUSTOM_LANDING_PAGE_KEY = "custom.landing.page.key";
 
 }
