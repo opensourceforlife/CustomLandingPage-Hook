@@ -17,7 +17,7 @@ This propery need to be set in portal.properties located in Custom Landing Page 
 
 
 
-###### Update (New options added !!!)
+### Update (New options added !!!)
 There ia a new option added by which any specific page wihtin a Site/Organization can be made a landing page for that Site/Organization instead of their home page.
 
 Just create a custom attribute of Site/Organization by mentioning the page friendlyURL.
@@ -38,7 +38,8 @@ Maven based source code is available in Git.
 * [CustomLandingPage-hook-6.1.1.1.war](http://goo.gl/aPfSh "CustomLandingPage-hook-6.1.1.1.war")
 
 
-## Custom Landing Page Hook on Liferay Marketplace !!
+## Custom Landing Page Hook on Liferay Marketplace !! 
+#### !! Stands Runnder Up in [Liferay Marketplace App Contest !! ](http://discover.liferay.com/marketplace-app-contest "Liferay Marketplace App Contest")
 * [Custom Landing Page Hook](http://www.liferay.com/marketplace/-/mp/application/17676547 "Custom Landing Page Hook")
 
 
