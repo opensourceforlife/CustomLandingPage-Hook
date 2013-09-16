@@ -20,7 +20,7 @@ This propery need to be set in portal.properties located in Custom Landing Page 
 ###### Update (New options added !!!)
 There ia a new option added by which any specific page wihtin a Site/Organization can be made a landing page for that Site/Organization instead of their home page.
 
-Just create a custom attribute of Site/Organization by mentioning the the page friendlyURL.
+Just create a custom attribute of Site/Organization by mentioning the page friendlyURL.
 
 For defining,
 
