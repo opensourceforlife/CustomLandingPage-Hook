@@ -1,4 +1,4 @@
-![OS4L](http://2.bp.blogspot.com/-2SirYYg_HHE/UT6o-wro58I/AAAAAAAAAzI/OwNf6nkXUMU/s1600/upload_00033073.png "OS4L")
+![OS4L](http://4.bp.blogspot.com/-q425Jqhwvj4/UlUz5zOFOqI/AAAAAAAABCk/xWmjUJy-czg/s640/Custom+Landing+Page+Banner.png "OS4L")
 Custom Landing Page Hook
 ========================
 
