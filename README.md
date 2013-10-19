@@ -35,6 +35,9 @@ For defining,
 
 * Site/Organization's Public page, create custom attribute of type *"TextField"* with key `"landingPagePublic"` and define value as page's friendlyURL. i.e. /welcome
 * Site/Organization's Private page, create custom attribute of type *"TextField"* with key `"landingPagePrivate"` and define value as page's friendlyURL. i.e. /myhome
+ 
+![Define specific landing page for site/organization via Custom Attribute in Custom Landing Page Hook](http://1.bp.blogspot.com/-wkY6NNk1PH0/UmIo3mBJhQI/AAAAAAAABDI/FndO8-ehf2E/s1600/Defining+Custom+Attribute.png "Define specific landing page for site/organization via Custom Attribute in Custom Landing Page Hook")
+
 
 ######Custom Landing Page Hook - Git Source
 
@@ -44,7 +47,7 @@ Maven based source code is available in Git.
 
 
 ######Packaged War
-* [CustomLandingPage-hook-6.1.1.1.war](http://goo.gl/aPfSh "CustomLandingPage-hook-6.1.1.1.war")
+* [CustomLandingPage-hook-6.1.1.1.war](https://github.com/opensourceforlife/CustomLandingPage-Hook/blob/master/maven/6.1.1CEGA2/CustomLandingPage-hook/Package/CustomLandingPage-hook-6.1.2.1.war?raw=true "CustomLandingPage-hook-6.1.2.1.war")
 
 
 ## Custom Landing Page Hook on Liferay Marketplace !! 
