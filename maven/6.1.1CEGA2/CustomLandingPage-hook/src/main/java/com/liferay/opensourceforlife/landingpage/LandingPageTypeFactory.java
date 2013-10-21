@@ -15,9 +15,11 @@ import com.liferay.opensourceforlife.util.CustomLandingPageConstant;
 public final class LandingPageTypeFactory
 {
 
+	/**
+	 * Default Constructor
+	 */
 	private LandingPageTypeFactory()
 	{
-
 		super();
 	}
 
@@ -34,9 +36,12 @@ public final class LandingPageTypeFactory
 				new OrganizationPrivatePageType());
 	}
 
+	/**
+	 * @param landingPageType
+	 * @return
+	 */
 	public static LandingPageType getLandingPageTypeInstance(final String landingPageType)
 	{
-
 		return pageTypeMap.containsKey(landingPageType) ? pageTypeMap.get(landingPageType)
 				: new DefaultLandingPageType();
 	}

@@ -16,10 +16,16 @@ import com.liferay.portal.kernel.exception.SystemException;
 public class UserPublicPageType implements LandingPageType
 {
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.liferay.opensourceforlife.landingpage.LandingPageType#getLandingPagePath(javax.servlet
+	 * .http.HttpServletRequest)
+	 */
 	public String getLandingPagePath(final HttpServletRequest request) throws PortalException,
 			SystemException
 	{
-		return CustomLandingPageUtil.getDisplayURL(request, false);
+		return CustomLandingPageUtil.getUserDisplayURL(request, Boolean.FALSE);
 	}
 
 }

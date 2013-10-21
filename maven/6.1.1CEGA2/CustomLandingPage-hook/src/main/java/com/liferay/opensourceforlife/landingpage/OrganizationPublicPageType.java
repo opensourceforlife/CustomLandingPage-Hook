@@ -8,10 +8,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.liferay.opensourceforlife.util.CustomLandingPageUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
@@ -31,27 +36,37 @@ public class OrganizationPublicPageType implements LandingPageType
 	public String getLandingPagePath(final HttpServletRequest request) throws PortalException,
 			SystemException
 	{
-
 		String organizationPath = StringPool.BLANK;
 
 		User currentUser = PortalUtil.getUser(request);
-
 		List<Organization> userOrganizations = currentUser.getOrganizations();
 
-		if (userOrganizations != null && !userOrganizations.isEmpty())
+		if (Validator.isNotNull(userOrganizations) && !userOrganizations.isEmpty())
 		{
-			Organization organization = userOrganizations.get(0);
 			// If user is member of more than one organization then it will take
 			// first organization from list
-			String organizationFriendlyURL = organization.getGroup().getFriendlyURL();
-
-			organizationPath = CustomLandingPageUtil.getLanguage(request)
-					+ PortalUtil.getPathFriendlyURLPublic()
-					+ organizationFriendlyURL
-					+ CustomLandingPageUtil.getLandingPageFriendlyURL(organization,
-							PortalUtil.getCompanyId(request), Boolean.FALSE);
+			Organization organization = userOrganizations.get(0);
+			if (Validator.isNotNull(organization))
+			{
+				Group organizationGroup = organization.getGroup();
+				if (organizationGroup.getPublicLayoutsPageCount() > 0)
+				{
+					organizationPath = CustomLandingPageUtil.getGroupFriendlyURL(request,
+							organizationGroup, Boolean.FALSE, Boolean.FALSE)
+							+ CustomLandingPageUtil.getLandingPageFriendlyURL(organizationGroup,
+									PortalUtil.getCompanyId(request), Boolean.FALSE);
+				} else
+				{
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug(organizationGroup.getName()
+								+ " organization site doesn't have any public page. So default landing page will be used");
+					}
+				}
+			}
 		}
-
 		return organizationPath;
 	}
+
+	private static final Log LOG = LogFactory.getLog(OrganizationPublicPageType.class);
 }

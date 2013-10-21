@@ -4,12 +4,18 @@
 
 package com.liferay.opensourceforlife.util;
 
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
+
 /**
  * @author Tejas Kanani
  */
 public final class CustomLandingPageConstant
 {
 
+	/**
+	 * 
+	 */
 	private CustomLandingPageConstant()
 	{
 	}
@@ -30,8 +36,19 @@ public final class CustomLandingPageConstant
 	public static final String PUBLIC = "Public";
 	public static final String PRIVATE = "Private";
 	public static final int FIVE = 5;
+	public static final int FOUR = 4;
 
 	public static final String LANDING_PAGE_KEY_DEFAULT_VALUE = "landingPage";
 	public static final String CUSTOM_LANDING_PAGE_KEY = "custom.landing.page.key";
 
+	public static final String PRIVATE_USER_SERVLET_MAPPING = PropsUtil
+			.get(PropsKeys.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
+
+	public static final String PRIVATE_GROUP_SERVLET_MAPPING = PropsUtil
+			.get(PropsKeys.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
+
+	public static final String PUBLIC_GROUP_SERVLET_MAPPING = PropsUtil
+			.get(PropsKeys.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
+
+	public static final String PORTAL_CONTEXT = PropsUtil.get(PropsKeys.PORTAL_CTX);
 }

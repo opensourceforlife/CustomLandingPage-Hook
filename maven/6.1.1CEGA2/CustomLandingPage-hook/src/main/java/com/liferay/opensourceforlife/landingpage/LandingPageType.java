@@ -15,6 +15,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 public interface LandingPageType
 {
 
-	public String getLandingPagePath(HttpServletRequest request) throws PortalException,
-			SystemException;
+	/**
+	 * @param request
+	 * @return
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	String getLandingPagePath(HttpServletRequest request) throws PortalException, SystemException;
 }

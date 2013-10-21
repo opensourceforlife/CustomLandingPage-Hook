@@ -10,11 +10,12 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
@@ -35,6 +36,9 @@ import com.liferay.portal.util.PortalUtil;
 public final class CustomLandingPageUtil
 {
 
+	/**
+	 * 
+	 */
 	private CustomLandingPageUtil()
 	{
 	}
@@ -48,7 +52,6 @@ public final class CustomLandingPageUtil
 	public static String getLanguage(final HttpServletRequest request) throws PortalException,
 			SystemException
 	{
-
 		String language = StringPool.BLANK;
 		Locale currentLocale = PortalUtil.getUser(request).getLocale();
 
@@ -70,9 +73,7 @@ public final class CustomLandingPageUtil
 	 */
 	private static String buildI18NPath(final Locale locale)
 	{
-
 		String languageId = LocaleUtil.toLanguageId(locale);
-
 		if (Validator.isNull(languageId))
 		{
 			return null;
@@ -95,7 +96,7 @@ public final class CustomLandingPageUtil
 	}
 
 	/**
-	 * Generate displayURL for specified group
+	 * Generate displayURL for current user's user group
 	 * 
 	 * @param request
 	 * @param isPrivateLayout
@@ -103,15 +104,13 @@ public final class CustomLandingPageUtil
 	 * @throws PortalException
 	 * @throws SystemException
 	 */
-	public static String getDisplayURL(final HttpServletRequest request,
+	public static String getUserDisplayURL(final HttpServletRequest request,
 			final boolean isPrivateLayout) throws PortalException, SystemException
 	{
-
 		String displayURL = StringPool.BLANK;
 
 		Group group = GroupLocalServiceUtil.getUserGroup(PortalUtil.getCompanyId(request),
 				PortalUtil.getUserId(request));
-
 		boolean isLayoutCountEmpty = true;
 
 		if (isPrivateLayout && group.getPrivateLayoutsPageCount() > 0)
@@ -127,10 +126,50 @@ public final class CustomLandingPageUtil
 			displayURL = generateLayoutDisplayUrl(group, isPrivateLayout);
 		} else
 		{
-			displayURL = generateUserLayoutDisplayUrl(group, isPrivateLayout);
+			displayURL = getGroupFriendlyURL(request, group, isPrivateLayout, Boolean.TRUE);
 		}
 
 		return displayURL;
+	}
+
+	/**
+	 * @param request
+	 * @param currentGroup
+	 * @param isPrivate
+	 * @param isUser
+	 * @return
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	public static String getGroupFriendlyURL(final HttpServletRequest request,
+			final Group currentGroup, final boolean isPrivate, final boolean isUser)
+			throws PortalException, SystemException
+	{
+		String friendlyURL = null;
+
+		if (isPrivate)
+		{
+			if (isUser)
+			{
+				friendlyURL = CustomLandingPageConstant.PRIVATE_USER_SERVLET_MAPPING;
+			} else
+			{
+				friendlyURL = CustomLandingPageConstant.PRIVATE_GROUP_SERVLET_MAPPING;
+			}
+		} else
+		{
+			friendlyURL = CustomLandingPageConstant.PUBLIC_GROUP_SERVLET_MAPPING;
+		}
+
+		StringBundler sb = new StringBundler(CustomLandingPageConstant.FOUR);
+
+		sb.append(CustomLandingPageConstant.PORTAL_CONTEXT);
+		sb.append(CustomLandingPageUtil.getLanguage(request));
+
+		sb.append(friendlyURL);
+		sb.append(currentGroup.getFriendlyURL());
+
+		return sb.toString();
 	}
 
 	/**
@@ -159,28 +198,6 @@ public final class CustomLandingPageUtil
 	}
 
 	/**
-	 * @param group
-	 * @param isPrivateLayout
-	 * @return
-	 */
-	private static String generateUserLayoutDisplayUrl(final Group group,
-			final boolean isPrivateLayout)
-	{
-		StringBundler sb = new StringBundler(CustomLandingPageConstant.FIVE);
-		if (isPrivateLayout)
-		{
-			sb.append(PortalUtil.getPathFriendlyURLPrivateUser());
-		} else
-		{
-			sb.append(PortalUtil.getPathFriendlyURLPublic());
-		}
-
-		sb.append(group.getFriendlyURL());
-
-		return sb.toString();
-	}
-
-	/**
 	 * @param userId
 	 * @return
 	 * @throws PortalException
@@ -188,7 +205,6 @@ public final class CustomLandingPageUtil
 	 */
 	public static List<Group> getSites(final long userId) throws PortalException, SystemException
 	{
-
 		List<Group> sites = new ArrayList<Group>();
 
 		for (Group group : GroupLocalServiceUtil.getUserGroups(userId))
@@ -220,14 +236,20 @@ public final class CustomLandingPageUtil
 					landingPageValue).getFriendlyURL();
 		} catch (PortalException e)
 		{
-			LOG.error("Error in getting page friendlyURL of value mentioned in custom attribute : "
-					+ landingPageValue);
-			LOG.error(e.getMessage(), e);
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error("Error in getting page friendlyURL of value mentioned in custom attribute : "
+						+ landingPageValue + ", Page might not exist");
+				LOG.error(e.getMessage(), e);
+			}
 		} catch (SystemException e)
 		{
-			LOG.error("Error in getting page friendlyURL of value mentioned in custom attribute : "
-					+ landingPageValue);
-			LOG.error(e.getMessage(), e);
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error("Error in getting page friendlyURL of value mentioned in custom attribute : "
+						+ landingPageValue + ", Page might not exist");
+				LOG.error(e.getMessage(), e);
+			}
 		}
 		return friendlyURL;
 	}
@@ -263,7 +285,7 @@ public final class CustomLandingPageUtil
 	}
 
 	/**
-	 * @param organization
+	 * @param group
 	 * @param companyId
 	 * @param isPrivateLayout
 	 * @return
@@ -288,7 +310,6 @@ public final class CustomLandingPageUtil
 						+ group.getName() + " site OR it is having null/blank value");
 			}
 		}
-
 		return landingPageFriendlyURL;
 	}
 
@@ -311,13 +332,16 @@ public final class CustomLandingPageUtil
 							: CustomLandingPageConstant.PUBLIC);
 		} catch (SystemException e)
 		{
-			LOG.error("Error in getting fetching "
-					+ CustomLandingPageConstant.CUSTOM_LANDING_PAGE_KEY
-					+ " value from portal.properties file", e);
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error("Error in getting fetching "
+						+ CustomLandingPageConstant.CUSTOM_LANDING_PAGE_KEY
+						+ " value from portal.properties file");
+				LOG.error(e.getMessage(), e);
+			}
 		}
-
 		return landingPageKey;
 	}
 
-	private static final Log LOG = LogFactoryUtil.getLog(CustomLandingPageUtil.class);
+	private static final Log LOG = LogFactory.getLog(CustomLandingPageUtil.class);
 }
