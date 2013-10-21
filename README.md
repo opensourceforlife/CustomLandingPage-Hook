@@ -47,7 +47,7 @@ Maven based source code is available in Git.
 
 
 ######Packaged War
-* [CustomLandingPage-hook-6.1.2.1.war](https://github.com/opensourceforlife/CustomLandingPage-Hook/blob/master/maven/6.1.1CEGA2/CustomLandingPage-hook/Package/CustomLandingPage-hook-6.1.2.1.war?raw=true "CustomLandingPage-hook-6.1.2.1.war")
+* [CustomLandingPage-hook-1.2.war](https://github.com/opensourceforlife/CustomLandingPage-Hook/blob/master/maven/6.1.1CEGA2/CustomLandingPage-hook/Package/CustomLandingPage-hook-1.2.war?raw=true "CustomLandingPage-hook-1.2.war")
 
 
 ## Custom Landing Page Hook on Liferay Marketplace !! 
