@@ -6,7 +6,7 @@
 	<artifactId>CustomLandingPage-hook</artifactId>
 	<packaging>war</packaging>
 	<name>CustomLandingPage Hook</name>
-	<version>6.1.2.1</version>
+	<version>1.2</version>
 	<build>
 		<plugins>
 			<plugin>
@@ -79,6 +79,6 @@
 	</dependencies>
 	<properties>
 		<liferay.auto.deploy.dir>target</liferay.auto.deploy.dir>
-		<liferay.version>6.1.1</liferay.version>
+		<liferay.version>6.1.2</liferay.version>
 	</properties>
 </project>
