@@ -1,5 +1,4 @@
 target/
-workspace/
 .project
-.settings
+.settings/
 .classpath
