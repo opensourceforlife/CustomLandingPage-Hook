@@ -163,7 +163,11 @@ public final class CustomLandingPageUtil
 
 		StringBundler sb = new StringBundler(CustomLandingPageConstant.FOUR);
 
-		sb.append(CustomLandingPageConstant.PORTAL_CONTEXT);
+		String portalContext = CustomLandingPageConstant.PORTAL_CONTEXT;
+		if (Validator.isNotNull(portalContext) && !StringPool.SLASH.equals(portalContext))
+		{
+			sb.append(portalContext);
+		}
 		sb.append(CustomLandingPageUtil.getLanguage(request));
 
 		sb.append(friendlyURL);
