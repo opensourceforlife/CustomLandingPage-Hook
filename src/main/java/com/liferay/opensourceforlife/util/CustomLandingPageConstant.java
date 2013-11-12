@@ -6,6 +6,7 @@ package com.liferay.opensourceforlife.util;
 
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * @author Tejas Kanani
@@ -50,5 +51,5 @@ public final class CustomLandingPageConstant
 	public static final String PUBLIC_GROUP_SERVLET_MAPPING = PropsUtil
 			.get(PropsKeys.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
 
-	public static final String PORTAL_CONTEXT = PropsUtil.get(PropsKeys.PORTAL_CTX);
+	public static final String PORTAL_CONTEXT = PortalUtil.getPathContext();
 }

@@ -83,7 +83,7 @@ public class CustomLandingPageAction extends Action
 				// set portal context if path is blank, which is needed if you are using non root
 				// context for your liferay instance
 				String portalContext = CustomLandingPageConstant.PORTAL_CONTEXT;
-				if (Validator.isNotNull(portalContext) && !StringPool.SLASH.equals(portalContext))
+				if (Validator.isNotNull(portalContext))
 				{
 					customLandingPath = portalContext;
 				}
