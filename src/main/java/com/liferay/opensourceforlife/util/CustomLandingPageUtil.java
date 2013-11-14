@@ -221,13 +221,14 @@ public final class CustomLandingPageUtil
 	}
 
 	/**
+	 * @param landingPageKey
 	 * @param landingPageValue
 	 * @param groupId
 	 * @param isPrivateLayout
 	 * @return
 	 */
-	public static String getLayoutFriendlyURL(final String landingPageValue, final long groupId,
-			final boolean isPrivateLayout)
+	public static String getLayoutFriendlyURL(final String landingPageKey,
+			final String landingPageValue, final long groupId, final boolean isPrivateLayout)
 	{
 		String friendlyURL = StringPool.BLANK;
 		try
@@ -238,16 +239,16 @@ public final class CustomLandingPageUtil
 		{
 			if (LOG.isErrorEnabled())
 			{
-				LOG.error("Error in getting page friendlyURL of value mentioned in custom attribute : "
-						+ landingPageValue + ", Page might not exist");
+				LOG.error("No such page exist with frientlyURL : " + landingPageValue
+						+ " , provided in " + landingPageKey + " custom attribute");
 				LOG.error(e.getMessage(), e);
 			}
 		} catch (SystemException e)
 		{
 			if (LOG.isErrorEnabled())
 			{
-				LOG.error("Error in getting page friendlyURL of value mentioned in custom attribute : "
-						+ landingPageValue + ", Page might not exist");
+				LOG.error("No such page exist with frientlyURL : " + landingPageValue
+						+ " , provided in " + landingPageKey + " custom attribute");
 				LOG.error(e.getMessage(), e);
 			}
 		}
@@ -272,7 +273,7 @@ public final class CustomLandingPageUtil
 					landingPageKey, Boolean.FALSE);
 			if (Validator.isNotNull(landingPageValue))
 			{
-				landingPageFriendlyURL = CustomLandingPageUtil.getLayoutFriendlyURL(
+				landingPageFriendlyURL = CustomLandingPageUtil.getLayoutFriendlyURL(landingPageKey,
 						landingPageValue, organization.getGroupId(), isPrivateLayout);
 			} else
 			{
@@ -302,7 +303,7 @@ public final class CustomLandingPageUtil
 					landingPageKey, Boolean.FALSE);
 			if (Validator.isNotNull(landingPageValue))
 			{
-				landingPageFriendlyURL = CustomLandingPageUtil.getLayoutFriendlyURL(
+				landingPageFriendlyURL = CustomLandingPageUtil.getLayoutFriendlyURL(landingPageKey,
 						landingPageValue, group.getGroupId(), isPrivateLayout);
 			} else
 			{

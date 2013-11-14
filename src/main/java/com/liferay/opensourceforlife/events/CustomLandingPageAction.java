@@ -77,33 +77,20 @@ public class CustomLandingPageAction extends Action
 
 		if (overrideDefaultLandingPagePath)
 		{
-			String customLandingPath = getCustomLandingPage(request);
-			if (Validator.isNull(customLandingPath))
+			path = getCustomLandingPage(request);
+
+			if (LOG.isDebugEnabled())
 			{
-				// set portal context if path is blank, which is needed if you are using non root
-				// context for your liferay instance
-				String portalContext = CustomLandingPageConstant.PORTAL_CONTEXT;
-				if (Validator.isNotNull(portalContext))
-				{
-					customLandingPath = portalContext;
-				}
+				LOG.debug("Custom Landing Page path" + StringPool.EQUAL + path + " for User : "
+						+ PortalUtil.getUser(request).getFullName());
 			}
-			path = customLandingPath;
 		}
 
-		if (LOG.isInfoEnabled())
+		if (Validator.isNotNull(path))
 		{
-			LOG.info("Custom Landing Page path" + StringPool.EQUAL + path);
+			HttpSession session = request.getSession();
+			session.setAttribute(WebKeys.LAST_PATH, new LastPath(StringPool.BLANK, path));
 		}
-
-		if (LOG.isDebugEnabled())
-		{
-			LOG.debug("Custom Landing Page path" + StringPool.EQUAL + path + " for User : "
-					+ PortalUtil.getUser(request).getFullName());
-		}
-
-		HttpSession session = request.getSession();
-		session.setAttribute(WebKeys.LAST_PATH, new LastPath(StringPool.BLANK, path));
 	}
 
 	/**
