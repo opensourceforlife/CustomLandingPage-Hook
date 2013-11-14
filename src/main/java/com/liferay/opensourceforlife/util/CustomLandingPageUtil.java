@@ -221,13 +221,14 @@ public final class CustomLandingPageUtil
 	}
 
 	/**
+	 * @param landingPageKey
 	 * @param landingPageValue
 	 * @param groupId
 	 * @param isPrivateLayout
 	 * @return
 	 */
-	public static String getLayoutFriendlyURL(final String landingPageValue, final long groupId,
-			final boolean isPrivateLayout)
+	public static String getLayoutFriendlyURL(final String landingPageKey,
+			final String landingPageValue, final long groupId, final boolean isPrivateLayout)
 	{
 		String friendlyURL = StringPool.BLANK;
 		try
@@ -238,16 +239,16 @@ public final class CustomLandingPageUtil
 		{
 			if (LOG.isErrorEnabled())
 			{
-				LOG.error("Error in getting page friendlyURL of value mentioned in custom attribute : "
-						+ landingPageValue + ", Page might not exist");
+				LOG.error("No such page exist with frientlyURL : " + landingPageValue
+						+ " , provided in " + landingPageKey + " custom attribute");
 				LOG.error(e.getMessage(), e);
 			}
 		} catch (SystemException e)
 		{
 			if (LOG.isErrorEnabled())
 			{
-				LOG.error("Error in getting page friendlyURL of value mentioned in custom attribute : "
-						+ landingPageValue + ", Page might not exist");
+				LOG.error("No such page exist with frientlyURL : " + landingPageValue
+						+ " , provided in " + landingPageKey + " custom attribute");
 				LOG.error(e.getMessage(), e);
 			}
 		}
@@ -268,16 +269,24 @@ public final class CustomLandingPageUtil
 		if (Validator.isNotNull(organization))
 		{
 			String landingPageKey = getLandingPageKey(companyId, isPrivateLayout);
-			String landingPageValue = (String) organization.getExpandoBridge().getAttribute(
-					landingPageKey, Boolean.FALSE);
-			if (Validator.isNotNull(landingPageValue))
+			if (organization.getExpandoBridge().hasAttribute(landingPageKey))
 			{
-				landingPageFriendlyURL = CustomLandingPageUtil.getLayoutFriendlyURL(
-						landingPageValue, organization.getGroupId(), isPrivateLayout);
+				String landingPageValue = (String) organization.getExpandoBridge().getAttribute(
+						landingPageKey, Boolean.FALSE);
+				if (Validator.isNotNull(landingPageValue))
+				{
+					landingPageFriendlyURL = CustomLandingPageUtil.getLayoutFriendlyURL(
+							landingPageKey, landingPageValue, organization.getGroupId(),
+							isPrivateLayout);
+				} else
+				{
+					LOG.debug("Custom Attribute with key " + landingPageKey + " in "
+							+ organization.getName() + " organization is having null/blank value");
+				}
 			} else
 			{
-				LOG.debug("Either no Custom Attribute found with key " + landingPageKey + " in "
-						+ organization.getName() + " organization OR it is having null/blank value");
+				LOG.debug("No Custom Attribute found with key " + landingPageKey + " in "
+						+ organization.getName() + " organization");
 			}
 		}
 
@@ -298,16 +307,23 @@ public final class CustomLandingPageUtil
 		if (Validator.isNotNull(group))
 		{
 			String landingPageKey = getLandingPageKey(companyId, isPrivateLayout);
-			String landingPageValue = (String) group.getExpandoBridge().getAttribute(
-					landingPageKey, Boolean.FALSE);
-			if (Validator.isNotNull(landingPageValue))
+			if (group.getExpandoBridge().hasAttribute(landingPageKey))
 			{
-				landingPageFriendlyURL = CustomLandingPageUtil.getLayoutFriendlyURL(
-						landingPageValue, group.getGroupId(), isPrivateLayout);
+				String landingPageValue = (String) group.getExpandoBridge().getAttribute(
+						landingPageKey, Boolean.FALSE);
+				if (Validator.isNotNull(landingPageValue))
+				{
+					landingPageFriendlyURL = CustomLandingPageUtil.getLayoutFriendlyURL(
+							landingPageKey, landingPageValue, group.getGroupId(), isPrivateLayout);
+				} else
+				{
+					LOG.debug("Custom Attribute found with key " + landingPageKey + " in "
+							+ group.getName() + " site is having null/blank value");
+				}
 			} else
 			{
-				LOG.debug("Either no Custom Attribute found with key " + landingPageKey + " in "
-						+ group.getName() + " site OR it is having null/blank value");
+				LOG.debug("No Custom Attribute found with key " + landingPageKey + " in "
+						+ group.getName() + " site");
 			}
 		}
 		return landingPageFriendlyURL;
@@ -334,8 +350,7 @@ public final class CustomLandingPageUtil
 		{
 			if (LOG.isErrorEnabled())
 			{
-				LOG.error("Error in getting fetching "
-						+ CustomLandingPageConstant.CUSTOM_LANDING_PAGE_KEY
+				LOG.error("Error in fetching " + CustomLandingPageConstant.CUSTOM_LANDING_PAGE_KEY
 						+ " value from portal.properties file");
 				LOG.error(e.getMessage(), e);
 			}

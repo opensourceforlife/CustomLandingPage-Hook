@@ -19,11 +19,14 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.struts.LastPath;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 
 /**
@@ -71,39 +74,40 @@ public class CustomLandingPageAction extends Action
 				&& LOG.isInfoEnabled())
 		{
 			LOG.info("Please set 'override.default.landing.page.path=true' "
-					+ "in hook's portal.properties to enable the functionality "
-					+ "provided by Custom Landing Page Hook");
+					+ "in hook's portal.properties to enable user to land on custom landing page using "
+					+ "Custom Landing Page Hook");
 		}
 
 		if (overrideDefaultLandingPagePath)
 		{
-			String customLandingPath = getCustomLandingPage(request);
-			if (Validator.isNull(customLandingPath))
+			path = getCustomLandingPage(request);
+
+			if (LOG.isDebugEnabled())
 			{
-				// set portal context if path is blank, which is needed if you are using non root
-				// context for your liferay instance
-				String portalContext = CustomLandingPageConstant.PORTAL_CONTEXT;
-				if (Validator.isNotNull(portalContext))
+				LOG.debug("Custom Landing Page path" + StringPool.EQUAL + path + " for User : "
+						+ PortalUtil.getUser(request).getFullName());
+			}
+		} else if (Validator.isNotNull(path))
+		{
+			if (path.contains("${liferay:screenName}") || path.contains("${liferay:userId}"))
+			{
+				User user = PortalUtil.getUser(request);
+				if (Validator.isNotNull(user))
 				{
-					customLandingPath = portalContext;
+					path = StringUtil.replace(
+							path,
+							new String[] { "${liferay:screenName}", "${liferay:userId}" },
+							new String[] { HtmlUtil.escapeURL(user.getScreenName()),
+									String.valueOf(user.getUserId()) });
 				}
 			}
-			path = customLandingPath;
 		}
 
-		if (LOG.isInfoEnabled())
+		if (Validator.isNotNull(path))
 		{
-			LOG.info("Custom Landing Page path" + StringPool.EQUAL + path);
+			HttpSession session = request.getSession();
+			session.setAttribute(WebKeys.LAST_PATH, new LastPath(StringPool.BLANK, path));
 		}
-
-		if (LOG.isDebugEnabled())
-		{
-			LOG.debug("Custom Landing Page path" + StringPool.EQUAL + path + " for User : "
-					+ PortalUtil.getUser(request).getFullName());
-		}
-
-		HttpSession session = request.getSession();
-		session.setAttribute(WebKeys.LAST_PATH, new LastPath(StringPool.BLANK, path));
 	}
 
 	/**
