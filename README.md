@@ -43,11 +43,25 @@ For defining,
 
 * https://github.com/opensourceforlife/CustomLandingPage-Hook
 
-Maven based source code is available in Git.
+###v1.2
+-------
+######Supported Liferay Versions
+* Liferay 6.2.0 CE
+
+######Download Packaged War
+* Check out [Release section] (https://github.com/opensourceforlife/CustomLandingPage-Hook/releases "Release Section")
 
 
-######Latest Packaged War
-* [CustomLandingPage-hook-1.2.war](https://github.com/opensourceforlife/CustomLandingPage-Hook/blob/v1.2/Package/CustomLandingPage-hook-1.2.war?raw=true "CustomLandingPage-hook-1.2.war")
+###v1.1
+-------
+######Supported Liferay Versions
+* Liferay 6.1.1 CE
+* Liferay 6.1.20 EE
+* Liferay 6.1.2+ CE
+* Liferay 6.1.30+ EE
+
+######Download Packaged War
+* Check out [Release section] (https://github.com/opensourceforlife/CustomLandingPage-Hook/releases "Release Section")
 
 
 ## Custom Landing Page Hook on Liferay Marketplace !! 
