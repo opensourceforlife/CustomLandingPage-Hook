@@ -43,10 +43,25 @@ For defining,
 
 * https://github.com/opensourceforlife/CustomLandingPage-Hook
 
-
+###v1.2
+-------
+######Supported Liferay Versions
+* Liferay 6.2.0 CE
 
 ######Download Packaged War
-* Packaged War of different versions can be download from [Release section] (https://github.com/opensourceforlife/CustomLandingPage-Hook/releases "Release Section")
+* Check out [Release section] (https://github.com/opensourceforlife/CustomLandingPage-Hook/releases "Release Section")
+
+
+###v1.1
+-------
+######Supported Liferay Versions
+* Liferay 6.1.1 CE
+* Liferay 6.1.20 EE
+* Liferay 6.1.2+ CE
+* Liferay 6.1.30+ EE
+
+######Download Packaged War
+* Check out [Release section] (https://github.com/opensourceforlife/CustomLandingPage-Hook/releases "Release Section")
 
 
 ## Custom Landing Page Hook on Liferay Marketplace !! 
