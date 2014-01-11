@@ -43,7 +43,7 @@ For defining,
 
 * https://github.com/opensourceforlife/CustomLandingPage-Hook
 
-###v1.2 (Will be equivalent to [v1.3](https://www.liferay.com/marketplace/-/mp/application/17676547 "v1.3") in Liferay Marketplace submission)
+###v1.2.1 (Will be equivalent to [v1.2.1](https://www.liferay.com/marketplace/-/mp/application/17676547 "v1.2.1") in Liferay Marketplace submission)
 -------
 ######Supported Liferay Versions
 * Liferay 6.2.0 CE
