@@ -1,12 +1,14 @@
 <?xml version="1.0"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liferay.opensourceforlife</groupId>
 	<artifactId>CustomLandingPage-hook</artifactId>
 	<packaging>war</packaging>
 	<name>CustomLandingPage Hook</name>
-	<version>1.2</version>
+	<url>https://github.com/opensourceforlife/CustomLandingPage-Hook</url>
+	<version>1.2.2</version>
 	<build>
 		<plugins>
 			<plugin>

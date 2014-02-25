@@ -31,6 +31,8 @@ public final class CustomLandingPageConstant
 	public static final String SITE_PRIVATE_PAGE = "sitePrivatePage";
 	public static final String ORGANIZATION_PRIVATE_PAGE = "organizationPrivatePage";
 	public static final String ORGANIZATION_PUBLIC_PAGE = "organizationPublicPage";
+	public static final String ROLE = "role";
+	public static final String USER_GROUP = "userGroup";
 	public static final String DEFAULT_LANDING_PAGE_TYPE = "default";
 
 	public static final String GUEST_GROUP_FRIENDLY_URL = "/guest";
@@ -41,6 +43,8 @@ public final class CustomLandingPageConstant
 
 	public static final String LANDING_PAGE_KEY_DEFAULT_VALUE = "landingPage";
 	public static final String CUSTOM_LANDING_PAGE_KEY = "custom.landing.page.key";
+	public static final String INCLUDE_SYSTEM_ROLE_KEY = "include.system.role";
+	public static final String INCLUDE_SYSTEM_USER_GROUP_KEY = "include.system.usergroup";
 
 	public static final String PRIVATE_USER_SERVLET_MAPPING = PropsUtil
 			.get(PropsKeys.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);

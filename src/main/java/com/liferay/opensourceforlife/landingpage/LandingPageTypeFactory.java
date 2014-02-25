@@ -34,6 +34,8 @@ public final class LandingPageTypeFactory
 				new OrganizationPublicPageType());
 		pageTypeMap.put(CustomLandingPageConstant.ORGANIZATION_PRIVATE_PAGE,
 				new OrganizationPrivatePageType());
+		pageTypeMap.put(CustomLandingPageConstant.ROLE, new RolePageType());
+		pageTypeMap.put(CustomLandingPageConstant.USER_GROUP, new UserGroupPageType());
 	}
 
 	/**

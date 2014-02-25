@@ -26,9 +26,12 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 
 /**
  * @author Tejas Kanani
@@ -268,10 +271,10 @@ public final class CustomLandingPageUtil
 
 		if (Validator.isNotNull(organization))
 		{
-			String landingPageKey = getLandingPageKey(companyId, isPrivateLayout);
-			if (organization.getExpandoBridge().hasAttribute(landingPageKey))
+			String landingPageKey = getLandingPageKey(companyId, isPrivateLayout, Boolean.TRUE);
+			if (Validator.isNotNull(landingPageKey))
 			{
-				String landingPageValue = (String) organization.getExpandoBridge().getAttribute(
+				String landingPageValue = getExpandoValue(organization.getExpandoBridge(),
 						landingPageKey, Boolean.FALSE);
 				if (Validator.isNotNull(landingPageValue))
 				{
@@ -283,10 +286,6 @@ public final class CustomLandingPageUtil
 					LOG.debug("Custom Attribute with key " + landingPageKey + " in "
 							+ organization.getName() + " organization is having null/blank value");
 				}
-			} else
-			{
-				LOG.debug("No Custom Attribute found with key " + landingPageKey + " in "
-						+ organization.getName() + " organization");
 			}
 		}
 
@@ -306,11 +305,12 @@ public final class CustomLandingPageUtil
 
 		if (Validator.isNotNull(group))
 		{
-			String landingPageKey = getLandingPageKey(companyId, isPrivateLayout);
-			if (group.getExpandoBridge().hasAttribute(landingPageKey))
+			String landingPageKey = getLandingPageKey(companyId, isPrivateLayout, Boolean.TRUE);
+
+			if (Validator.isNotNull(landingPageKey))
 			{
-				String landingPageValue = (String) group.getExpandoBridge().getAttribute(
-						landingPageKey, Boolean.FALSE);
+				String landingPageValue = getExpandoValue(group.getExpandoBridge(), landingPageKey,
+						Boolean.FALSE);
 				if (Validator.isNotNull(landingPageValue))
 				{
 					landingPageFriendlyURL = CustomLandingPageUtil.getLayoutFriendlyURL(
@@ -320,32 +320,116 @@ public final class CustomLandingPageUtil
 					LOG.debug("Custom Attribute found with key " + landingPageKey + " in "
 							+ group.getName() + " site is having null/blank value");
 				}
-			} else
-			{
-				LOG.debug("No Custom Attribute found with key " + landingPageKey + " in "
-						+ group.getName() + " site");
 			}
 		}
 		return landingPageFriendlyURL;
 	}
 
 	/**
-	 * Method will get the Landing Page key that will be used as key to fetch site/organization's
-	 * custom attribute
+	 * @param role
+	 * @param companyId
+	 * @return
+	 */
+	public static String getLandingPageFriendlyURL(final Role role, final long companyId)
+	{
+		String landingPageFriendlyURL = StringPool.BLANK;
+
+		if (Validator.isNotNull(role))
+		{
+			String landingPageKey = getLandingPageKey(companyId, Boolean.FALSE, Boolean.FALSE);
+			if (Validator.isNotNull(landingPageKey))
+			{
+				String landingPageValue = getExpandoValue(role.getExpandoBridge(), landingPageKey,
+						Boolean.FALSE);
+				if (Validator.isNotNull(landingPageValue))
+				{
+					landingPageFriendlyURL = landingPageValue;
+				} else
+				{
+					LOG.debug("Custom Attribute found with key " + landingPageKey + " in "
+							+ role.getName() + " Role is having null/blank value");
+				}
+			}
+		}
+		return landingPageFriendlyURL;
+	}
+
+	/**
+	 * @param userGroup
+	 * @param companyId
+	 * @return
+	 */
+	public static String getLandingPageFriendlyURL(final UserGroup userGroup, final long companyId)
+	{
+		String landingPageFriendlyURL = StringPool.BLANK;
+
+		if (Validator.isNotNull(userGroup))
+		{
+			String landingPageKey = getLandingPageKey(companyId, Boolean.FALSE, Boolean.FALSE);
+			if (Validator.isNotNull(landingPageKey))
+			{
+				String landingPageValue = getExpandoValue(userGroup.getExpandoBridge(),
+						landingPageKey, Boolean.FALSE);
+				if (Validator.isNotNull(landingPageValue))
+				{
+					landingPageFriendlyURL = landingPageValue;
+				} else
+				{
+					LOG.debug("Custom Attribute found with key " + landingPageKey + " in "
+							+ userGroup.getName() + " User Group is having null/blank value");
+				}
+			}
+		}
+		return landingPageFriendlyURL;
+	}
+
+	/**
+	 * Method will return expando attribute value for given attributeName
+	 * 
+	 * @param expandoBridge
+	 * @param attributeName
+	 * @param isSecure
+	 * @return
+	 */
+	private static String getExpandoValue(final ExpandoBridge expandoBridge,
+			final String attributeName, final Boolean isSecure)
+	{
+		String expandoValue = null;
+		if (Validator.isNotNull(attributeName) && expandoBridge.hasAttribute(attributeName))
+		{
+			expandoValue = (String) expandoBridge.getAttribute(attributeName, isSecure);
+		} else
+		{
+			LOG.debug("No Custom Attribute found with key " + attributeName);
+		}
+
+		return expandoValue;
+	}
+
+	/**
+	 * Method will get the Landing Page key that will be used as key to fetch Site,Organization,Role
+	 * OR User Group's custom attribute
 	 * 
 	 * @param isPrivateLayout
+	 * @param isTypeLayout
+	 *            - True if getting landingPageKey for Site OR Organization & False if getting
+	 *            landingPage for Role OR User Group
 	 * @return Landing Page Key for Custom Attribute
 	 */
-	public static String getLandingPageKey(final long companyId, final Boolean isPrivateLayout)
+	public static String getLandingPageKey(final long companyId, final Boolean isPrivateLayout,
+			final Boolean isTypeLayout)
 	{
 		String landingPageKey = CustomLandingPageConstant.LANDING_PAGE_KEY_DEFAULT_VALUE;
 		try
 		{
 			landingPageKey = PrefsPropsUtil.getString(companyId,
 					CustomLandingPageConstant.CUSTOM_LANDING_PAGE_KEY, landingPageKey);
-			landingPageKey = landingPageKey
-					+ (isPrivateLayout ? CustomLandingPageConstant.PRIVATE
-							: CustomLandingPageConstant.PUBLIC);
+			if (isTypeLayout)
+			{
+				landingPageKey = landingPageKey
+						+ (isPrivateLayout ? CustomLandingPageConstant.PRIVATE
+								: CustomLandingPageConstant.PUBLIC);
+			}
 		} catch (SystemException e)
 		{
 			if (LOG.isErrorEnabled())
@@ -356,6 +440,36 @@ public final class CustomLandingPageUtil
 			}
 		}
 		return landingPageKey;
+	}
+
+	public static Boolean getIncludeSystemRole()
+	{
+		boolean includeSystemRole = Boolean.FALSE;
+		try
+		{
+			includeSystemRole = PrefsPropsUtil
+					.getBoolean(CustomLandingPageConstant.INCLUDE_SYSTEM_ROLE_KEY);
+		} catch (SystemException e)
+		{
+			LOG.error(e.getMessage(), e);
+		}
+
+		return includeSystemRole;
+	}
+
+	public static Boolean getIncludeSystemUserGroup()
+	{
+		boolean includeSystemRole = Boolean.FALSE;
+		try
+		{
+			includeSystemRole = PrefsPropsUtil
+					.getBoolean(CustomLandingPageConstant.INCLUDE_SYSTEM_ROLE_KEY);
+		} catch (SystemException e)
+		{
+			LOG.error(e.getMessage(), e);
+		}
+
+		return includeSystemRole;
 	}
 
 	private static final Log LOG = LogFactory.getLog(CustomLandingPageUtil.class);
