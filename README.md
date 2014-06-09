@@ -23,12 +23,37 @@ Set this property as per your needs for landing page after user log in. It could
 custom.landing.page.type={userPrivatePage/userPublicPage/sitePublicPage/sitePrivatePage/organizationPublicPage/organizationPrivatePage/role/userGroup} 
 ```
 
-This propery need to be set in `portal.properties` located in Custom Landing Page hook itself. Either you can modify it directly in war. Or you can download the source code from Git repositry and you can build war from source with your desired changes.   
+This propery need to be set in `portal.properties` located in Custom Landing Page hook itself. Either you can modify it directly in war. Or you can download the source code from Git repositry and you can build war from source with your desired changes.
 
 
+#Getting Started
+------------------
+Here I'll be showing you how you can use this hook and leverage the flexibility for defining landing page once user logs in.
 
-###v1.2.2
----------
+##1) Download
+Before going further, make sure you know the version of your current Liferay instance which you want to use Custom Landing Page Hook for. Next, go to Custom Landing Page Hook's [Release section] (https://github.com/opensourceforlife/CustomLandingPage-Hook/releases "Release Section") in order to download the hook for your Liferay version.
+
+_Make sure you check the supported Liferay versions for each release before downloading._
+
+
+##2) Configure
+Next we need to configure the hook accroding to the need. In order to do that follow below steps.
+* Open downloaded CustomLandingPage-hook-*.war using winzip/winrar/7-zip/any other tool
+* Go to WEB-INF/classes
+* Open portal.properties
+* Set the value of `custom.landing.page.type` property as per your need.  
+i.e. `custom.landing.page.type=userGroup`
+* Save the changes to the same war file
+
+ 
+##3) Deploy
+Next we need to deploy the updated war. To do that, you can simple drop the war file in Liferay `deploy` folder.
+
+
+###Version History
+-----------------
+
+####v1.2.2
 * Added provision to define custom landing page for specific Role & User Group
 * For role & userGroup, provide landing page complete relative URL in role OR userGroup's custom attribute with key "landingPage"   
 ```landingPage = /web/mysite/home```
@@ -41,9 +66,7 @@ This propery need to be set in `portal.properties` located in Custom Landing Pag
 * Packaged War & Complete source can be download from [Release section] (https://github.com/opensourceforlife/CustomLandingPage-Hook/releases "Release Section") 
 
 
-###v1.2.1
----------
-
+####v1.2.1
 There ia a new option added by which any specific page wihtin a Site/Organization can be made a landing page for that Site/Organization instead of their home page.
 
 Just create a custom attribute of Site/Organization by mentioning the page friendlyURL.
@@ -63,7 +86,7 @@ For defining,
    
    
 
-###v1.1
+####v1.1
 -------
 * Equivalent to [v1.2](https://www.liferay.com/marketplace/-/mp/application/17676547 "v1.2") in Liferay Marketplace submission)
 
