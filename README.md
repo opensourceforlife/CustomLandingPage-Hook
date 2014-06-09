@@ -49,11 +49,12 @@ i.e. `custom.landing.page.type=userGroup`
 ##3) Deploy
 Next we need to deploy the updated war. To do that, you can simple drop the war file in Liferay `deploy` folder.
 
-
+------------------
 ###Version History
------------------
+
 
 ####v1.2.2
+----------
 * Added provision to define custom landing page for specific Role & User Group
 * For role & userGroup, provide landing page complete relative URL in role OR userGroup's custom attribute with key "landingPage"   
 ```landingPage = /web/mysite/home```
@@ -67,6 +68,7 @@ Next we need to deploy the updated war. To do that, you can simple drop the war 
 
 
 ####v1.2.1
+----------
 There ia a new option added by which any specific page wihtin a Site/Organization can be made a landing page for that Site/Organization instead of their home page.
 
 Just create a custom attribute of Site/Organization by mentioning the page friendlyURL.
