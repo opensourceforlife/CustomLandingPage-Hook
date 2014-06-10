@@ -45,7 +45,24 @@ Next we need to configure the hook accroding to the need. In order to do that fo
 i.e. `custom.landing.page.type=userGroup`
 * Save the changes to the same war file
 
+####Advance Configuration
+
+**1. Site / Organization**<br />
+If you want any specific page wihtin a Site/Organization be a landing page for that Site/Organization instead of it's default home page(Generally a first page), you can achieve it by creating a custom attribute for Site/Organization and providing required page's __friendlyURL__.
  
+For,
+* Site/Organization's Public page, create custom attribute of type *"TextField"* with key `"landingPagePublic"` and define value as page's friendlyURL. i.e. /welcome
+* Site/Organization's Private page, create custom attribute of type *"TextField"* with key `"landingPagePrivate"` and define value as page's friendlyURL. i.e. /myhome
+ 
+![Define specific landing page for site/organization via Custom Attribute in Custom Landing Page Hook](http://1.bp.blogspot.com/-wkY6NNk1PH0/UmIo3mBJhQI/AAAAAAAABDI/FndO8-ehf2E/s1600/Defining+Custom+Attribute.png "Define specific landing page for site/organization via Custom Attribute in Custom Landing Page Hook")
+ 
+
+**2. Usergroup / Role** (only for Liferay 6.2+)<br />
+Starting from v1.2.2, new provision got added to define custom landing page for users who is member of specific User Group & Role. So for this you just need to create custom attribute for Usergroup/Role with key __"landingPage"__. And provide desired landing page's **complete relative URL**.<br />
+i.e. ```landingPage = /web/mysite/home```
+
+<br />
+
 ##3) Deploy
 Next we need to deploy the updated war. To do that, you can simple drop the war file in Liferay `deploy` folder.
 
@@ -76,8 +93,7 @@ For defining,
 
 * Site/Organization's Public page, create custom attribute of type *"TextField"* with key `"landingPagePublic"` and define value as page's friendlyURL. i.e. /welcome
 * Site/Organization's Private page, create custom attribute of type *"TextField"* with key `"landingPagePrivate"` and define value as page's friendlyURL. i.e. /myhome
- 
-![Define specific landing page for site/organization via Custom Attribute in Custom Landing Page Hook](http://1.bp.blogspot.com/-wkY6NNk1PH0/UmIo3mBJhQI/AAAAAAAABDI/FndO8-ehf2E/s1600/Defining+Custom+Attribute.png "Define specific landing page for site/organization via Custom Attribute in Custom Landing Page Hook")
+
 
 ######Supported Liferay Versions
 * Liferay 6.2.0 CE
