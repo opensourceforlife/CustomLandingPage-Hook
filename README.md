@@ -45,6 +45,7 @@ Next we need to configure the hook accroding to the need. In order to do that fo
 i.e. `custom.landing.page.type=userGroup`
 * Save the changes to the same war file
 
+<br />
 ####Advance Configuration
 
 **1. Site / Organization**<br />
@@ -56,7 +57,7 @@ For,
  
 ![Define specific landing page for site/organization via Custom Attribute in Custom Landing Page Hook](http://1.bp.blogspot.com/-wkY6NNk1PH0/UmIo3mBJhQI/AAAAAAAABDI/FndO8-ehf2E/s1600/Defining+Custom+Attribute.png "Define specific landing page for site/organization via Custom Attribute in Custom Landing Page Hook")
  
-
+<br />
 **2. Usergroup / Role** (only for Liferay 6.2+)<br />
 Starting from v1.2.2, new provision got added to define custom landing page for users who is member of specific User Group & Role. So for this you just need to create custom attribute for Usergroup/Role with key __"landingPage"__. And provide desired landing page's **complete relative URL**.<br />
 i.e. ```landingPage = /web/mysite/home```
