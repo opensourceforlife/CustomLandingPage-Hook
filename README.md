@@ -49,12 +49,12 @@ i.e. `custom.landing.page.type=userGroup`
 ##3) Deploy
 Next we need to deploy the updated war. To do that, you can simple drop the war file in Liferay `deploy` folder.
 
-------------------
-###Version History
+<br /><br />
+
+##Version History
 
 
 ####v1.2.2
-----------
 * Added provision to define custom landing page for specific Role & User Group
 * For role & userGroup, provide landing page complete relative URL in role OR userGroup's custom attribute with key "landingPage"   
 ```landingPage = /web/mysite/home```
@@ -66,9 +66,8 @@ Next we need to deploy the updated war. To do that, you can simple drop the war 
 ######Download 
 * Packaged War & Complete source can be download from [Release section] (https://github.com/opensourceforlife/CustomLandingPage-Hook/releases "Release Section") 
 
-
+<br />
 ####v1.2.1
-----------
 There ia a new option added by which any specific page wihtin a Site/Organization can be made a landing page for that Site/Organization instead of their home page.
 
 Just create a custom attribute of Site/Organization by mentioning the page friendlyURL.
@@ -87,9 +86,8 @@ For defining,
 * Packaged War & Complete source can be download from [Release section] (https://github.com/opensourceforlife/CustomLandingPage-Hook/releases "Release Section")   
    
    
-
+<br />
 ####v1.1
--------
 * Equivalent to [v1.2](https://www.liferay.com/marketplace/-/mp/application/17676547 "v1.2") in Liferay Marketplace submission)
 
 ######Supported Liferay Versions
@@ -102,13 +100,13 @@ For defining,
 * Packaged War & Complete source can be download from [Release section] (https://github.com/opensourceforlife/CustomLandingPage-Hook/releases "Release Section")  
 
    
-   
+<br /><br />
    
 ## Custom Landing Page Hook on Liferay Marketplace !! 
 #### !! Stands Runnder Up in [Liferay Marketplace App Contest !! ](http://discover.liferay.com/marketplace-app-contest "Liferay Marketplace App Contest")
 * [Custom Landing Page Hook](http://www.liferay.com/marketplace/-/mp/application/17676547 "Custom Landing Page Hook")
 
-
+<br /><br />
 
 ### For any Issue/Support
 For any issue/support, you can either reach out to me at [admin@opensourceforlife.com](mailto:admin@opensoruceforlife.com "admin@opensourceforlife.com"). Or you can create a issue in [Github issues](https://github.com/opensourceforlife/CustomLandingPage-Hook/issues "Github Issues")
