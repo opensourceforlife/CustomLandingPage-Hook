@@ -294,11 +294,12 @@ public final class CustomLandingPageUtil
 
 	/**
 	 * @param group
+	 * @param expandoBridge
 	 * @param companyId
 	 * @param isPrivateLayout
 	 * @return
 	 */
-	public static String getLandingPageFriendlyURL(final Group group, final long companyId,
+	public static String getLandingPageFriendlyURL(final Group group, final ExpandoBridge expandoBridge, final long companyId,
 			final Boolean isPrivateLayout)
 	{
 		String landingPageFriendlyURL = StringPool.BLANK;
@@ -309,7 +310,7 @@ public final class CustomLandingPageUtil
 
 			if (Validator.isNotNull(landingPageKey))
 			{
-				String landingPageValue = getExpandoValue(group.getExpandoBridge(), landingPageKey,
+				String landingPageValue = getExpandoValue(expandoBridge, landingPageKey,
 						Boolean.FALSE);
 				if (Validator.isNotNull(landingPageValue))
 				{

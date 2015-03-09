@@ -53,7 +53,7 @@ public class OrganizationPrivatePageType implements LandingPageType
 				{
 					organizationPath = CustomLandingPageUtil.getGroupFriendlyURL(request,
 							organizationGroup, Boolean.TRUE, Boolean.FALSE)
-							+ CustomLandingPageUtil.getLandingPageFriendlyURL(organizationGroup,
+							+ CustomLandingPageUtil.getLandingPageFriendlyURL(organizationGroup,organization.getExpandoBridge(),
 									PortalUtil.getCompanyId(request), Boolean.TRUE);
 				} else
 				{

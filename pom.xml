@@ -8,7 +8,7 @@
 	<packaging>war</packaging>
 	<name>CustomLandingPage Hook</name>
 	<url>https://github.com/opensourceforlife/CustomLandingPage-Hook</url>
-	<version>1.2.2</version>
+	<version>1.2.3</version>
 	<build>
 		<plugins>
 			<plugin>
@@ -81,6 +81,6 @@
 	</dependencies>
 	<properties>
 		<liferay.auto.deploy.dir>target</liferay.auto.deploy.dir>
-		<liferay.version>6.2.0-GA1</liferay.version>
+		<liferay.version>6.2.1</liferay.version>
 	</properties>
 </project>

@@ -49,7 +49,7 @@ public class SitePrivatePageType implements LandingPageType
 			{
 				sitePath = CustomLandingPageUtil.getGroupFriendlyURL(request, site, Boolean.TRUE,
 						Boolean.FALSE)
-						+ CustomLandingPageUtil.getLandingPageFriendlyURL(site,
+						+ CustomLandingPageUtil.getLandingPageFriendlyURL(site,site.getExpandoBridge(),
 								PortalUtil.getCompanyId(request), Boolean.TRUE);
 			} else
 			{
