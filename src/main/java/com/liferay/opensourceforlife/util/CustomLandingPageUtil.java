@@ -10,12 +10,11 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
@@ -473,5 +472,5 @@ public final class CustomLandingPageUtil
 		return includeSystemRole;
 	}
 
-	private static final Log LOG = LogFactory.getLog(CustomLandingPageUtil.class);
+	private static final Log LOG = LogFactoryUtil.getLog(CustomLandingPageUtil.class);
 }
