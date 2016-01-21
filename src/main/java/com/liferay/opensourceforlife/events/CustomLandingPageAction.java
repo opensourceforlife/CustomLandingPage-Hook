@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import com.liferay.opensourceforlife.landingpage.LandingPageType;
 import com.liferay.opensourceforlife.landingpage.LandingPageTypeFactory;
@@ -31,6 +32,7 @@ import com.liferay.portal.util.PortalUtil;
 
 /**
  * @author Tejas Kanani
+ * @author vrf495
  */
 public class CustomLandingPageAction extends Action
 {
@@ -80,14 +82,19 @@ public class CustomLandingPageAction extends Action
 
 		if (overrideDefaultLandingPagePath)
 		{
-			path = getCustomLandingPage(request);
+			String newPath = getCustomLandingPage(request);
+			
+			if (Validator.isNotNull(newPath) && !newPath.equals(StringPool.BLANK))
+				path = newPath;
 
 			if (LOG.isDebugEnabled())
 			{
 				LOG.debug("Custom Landing Page path" + StringPool.EQUAL + path + " for User : "
 						+ PortalUtil.getUser(request).getFullName());
 			}
-		} else if (Validator.isNotNull(path))
+		} 
+
+		if (Validator.isNotNull(path))
 		{
 			if (path.contains("${liferay:screenName}") || path.contains("${liferay:userId}"))
 			{
@@ -144,5 +151,5 @@ public class CustomLandingPageAction extends Action
 		return customLandingPagePath;
 	}
 
-	private static final Log LOG = LogFactory.getLog(CustomLandingPageAction.class);
+	private static final Log LOG = LogFactoryUtil.getLog(CustomLandingPageAction.class);
 }

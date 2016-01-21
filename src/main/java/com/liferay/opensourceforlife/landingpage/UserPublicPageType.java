@@ -15,7 +15,6 @@ import com.liferay.portal.kernel.exception.SystemException;
  */
 public class UserPublicPageType implements LandingPageType
 {
-
 	/*
 	 * (non-Javadoc)
 	 * @see

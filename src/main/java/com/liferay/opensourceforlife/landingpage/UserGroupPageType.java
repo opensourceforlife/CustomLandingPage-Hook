@@ -9,8 +9,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import com.liferay.opensourceforlife.util.CustomLandingPageUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -92,5 +92,5 @@ public class UserGroupPageType implements LandingPageType
 		return userUserGroup;
 	}
 
-	private static final Log LOG = LogFactory.getLog(UserGroupPageType.class);
+	private static final Log LOG = LogFactoryUtil.getLog(UserGroupPageType.class);
 }
