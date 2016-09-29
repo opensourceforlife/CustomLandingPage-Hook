@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 
 package com.liferay.opensourceforlife.events;
@@ -42,7 +42,7 @@ public class CustomLandingPageAction extends Action
 		try
 		{
 			doRun(request, response);
-		} catch (Exception e)
+		} catch (final Exception e)
 		{
 			throw new ActionException(e);
 		}
@@ -51,7 +51,7 @@ public class CustomLandingPageAction extends Action
 	protected void doRun(final HttpServletRequest request, final HttpServletResponse response)
 			throws SystemException, PortalException
 	{
-		long companyId = PortalUtil.getCompanyId(request);
+		final long companyId = PortalUtil.getCompanyId(request);
 
 		String path = PrefsPropsUtil.getString(companyId, PropsKeys.DEFAULT_LANDING_PAGE_PATH);
 
@@ -61,7 +61,7 @@ public class CustomLandingPageAction extends Action
 		}
 
 		// Check for override.default.landing.page.path property value
-		boolean overrideDefaultLandingPagePath = PrefsPropsUtil.getBoolean(companyId,
+		final boolean overrideDefaultLandingPagePath = PrefsPropsUtil.getBoolean(companyId,
 				CustomLandingPageConstant.OVERRIDE_DEFAULT_LANDING_PAGE_PATH);
 
 		if (LOG.isDebugEnabled())
@@ -87,44 +87,43 @@ public class CustomLandingPageAction extends Action
 				LOG.debug("Custom Landing Page path" + StringPool.EQUAL + path + " for User : "
 						+ PortalUtil.getUser(request).getFullName());
 			}
-		} else if (Validator.isNotNull(path))
+		}
+		if (Validator.isNotNull(path))
 		{
 			if (path.contains("${liferay:screenName}") || path.contains("${liferay:userId}"))
 			{
-				User user = PortalUtil.getUser(request);
+				final User user = PortalUtil.getUser(request);
 				if (Validator.isNotNull(user))
 				{
-					path = StringUtil.replace(
-							path,
-							new String[] { "${liferay:screenName}", "${liferay:userId}" },
-							new String[] { HtmlUtil.escapeURL(user.getScreenName()),
-									String.valueOf(user.getUserId()) });
+					path = StringUtil.replace(path, new String[]
+					{ "${liferay:screenName}", "${liferay:userId}" }, new String[]
+					{ HtmlUtil.escapeURL(user.getScreenName()), String.valueOf(user.getUserId()) });
 				}
 			}
 		}
 
 		if (Validator.isNotNull(path))
 		{
-			HttpSession session = request.getSession();
+			final HttpSession session = request.getSession();
 			session.setAttribute(WebKeys.LAST_PATH, new LastPath(StringPool.BLANK, path));
 		}
 	}
 
 	/**
 	 * Returns custom landing page path after user login
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 * @throws PortalException
 	 * @throws SystemException
 	 */
-	private String getCustomLandingPage(final HttpServletRequest request) throws PortalException,
-			SystemException
+	private String getCustomLandingPage(final HttpServletRequest request)
+			throws PortalException, SystemException
 	{
-		long companyId = PortalUtil.getCompanyId(request);
+		final long companyId = PortalUtil.getCompanyId(request);
 		String customLandingPagePath = StringPool.BLANK;
 
-		String landingPageTypeSelection = PrefsPropsUtil.getString(companyId,
+		final String landingPageTypeSelection = PrefsPropsUtil.getString(companyId,
 				CustomLandingPageConstant.CUSTOM_LANDING_PAGE_TYPE,
 				CustomLandingPageConstant.DEFAULT_LANDING_PAGE_TYPE);
 
@@ -136,7 +135,7 @@ public class CustomLandingPageAction extends Action
 
 		if (Validator.isNotNull(landingPageTypeSelection))
 		{
-			LandingPageType landingPageType = LandingPageTypeFactory
+			final LandingPageType landingPageType = LandingPageTypeFactory
 					.getLandingPageTypeInstance(landingPageTypeSelection);
 			customLandingPagePath = landingPageType.getLandingPagePath(request);
 		}

@@ -10,7 +10,7 @@
 	
 	<appender name="FILE" class="org.apache.log4j.rolling.RollingFileAppender">
         <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
-            <param name="FileNamePattern" value="../../logs/custom-landing-page-hook.%d{yyyy-MM-dd}.log" />
+            <param name="FileNamePattern" value="${liferay.home}/logs/custom-landing-page-hook.%d{yyyy-MM-dd}.log" />
         </rollingPolicy>
  
         <layout class="org.apache.log4j.PatternLayout">
